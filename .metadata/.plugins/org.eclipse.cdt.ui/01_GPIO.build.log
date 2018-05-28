@@ -1,0 +1,7 @@
+12:17:37 **** Clean-only build of configuration Debug for project 01_GPIO ****
+make clean 
+rm -rf *
+ 
+
+12:17:37 Build Finished (took 172ms)
+

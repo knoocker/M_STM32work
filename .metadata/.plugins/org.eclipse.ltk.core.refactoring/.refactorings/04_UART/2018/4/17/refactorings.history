@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;04_UART/03_TIMER_homework Run.cfg&apos; to &apos;04_UART.cfg&apos;" description="Rename resource &apos;03_TIMER_homework Run.cfg&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="03_TIMER_homework Run.cfg" name="04_UART.cfg" stamp="1524477332577" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;04_UART/03_TIMER_homework.xml&apos; to &apos;04_UART.xml&apos;" description="Rename resource &apos;03_TIMER_homework.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="03_TIMER_homework.xml" name="04_UART.xml" stamp="1524477337718" updateReferences="true"/>
+</session>

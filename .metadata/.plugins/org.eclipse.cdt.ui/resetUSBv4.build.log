@@ -1,0 +1,7 @@
+15:36:55 **** Clean-only build of configuration Debug for project resetUSBv4 ****
+make clean 
+rm -rf *
+ 
+
+15:36:55 Build Finished (took 223ms)
+

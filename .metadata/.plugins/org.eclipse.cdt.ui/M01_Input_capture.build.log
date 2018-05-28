@@ -1,0 +1,29 @@
+14:41:25 **** Incremental Build of configuration Debug for project M01_Input_capture ****
+make all 
+Building file: C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c
+Invoking: MCU GCC Compiler
+C:\Git\Marek\STM32work\M01_Input_capture\SW4STM32\M01_Input_capture\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F303xC -I"C:/Git/Marek/STM32work/M01_Input_capture/Inc" -I"C:/Git/Marek/STM32work/M01_Input_capture/Drivers/STM32F3xx_HAL_Driver/Inc" -I"C:/Git/Marek/STM32work/M01_Input_capture/Drivers/STM32F3xx_HAL_Driver/Inc/Legacy" -I"C:/Git/Marek/STM32work/M01_Input_capture/Drivers/CMSIS/Device/ST/STM32F3xx/Include" -I"C:/Git/Marek/STM32work/M01_Input_capture/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Application/User/main.d" -MT"Application/User/main.o" -o "Application/User/main.o" "C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c"
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c: In function 'HAL_TIM_IC_CaptureCallback':
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c:66:18: warning: implicit declaration of function '__HAL_TIM_GetCompare' [-Wimplicit-function-declaration]
+   input_capture= __HAL_TIM_GetCompare(&htim2, TIM_CHANNEL_1);    //read TIM2 channel 1 capture value
+                  ^~~~~~~~~~~~~~~~~~~~
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c:67:3: warning: implicit declaration of function '__HAL_TIM_SetCounter' [-Wimplicit-function-declaration]
+   __HAL_TIM_SetCounter(&htim2, 0);    //reset counter after input capture interrupt occurs
+   ^~~~~~~~~~~~~~~~~~~~
+Finished building: C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c
+ 
+Building target: M01_Input_capture.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F303VCTx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "M01_Input_capture.elf" @"objects.list"   -lm
+Application/User/main.o: In function `HAL_TIM_IC_CaptureCallback':
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c:66: undefined reference to `__HAL_TIM_GetCompare'
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c:67: undefined reference to `__HAL_TIM_SetCounter'
+Application/User/main.o: In function `main':
+C:/Git/Marek/STM32work/M01_Input_capture/Src/main.c:115: undefined reference to `__HAL_TIM_GetCompare'
+collect2.exe: error: ld returned 1 exit status
+makefile:36: recipe for target 'M01_Input_capture.elf' failed
+make: *** [M01_Input_capture.elf] Error 1
+
+14:41:26 Build Finished (took 822ms)
+
