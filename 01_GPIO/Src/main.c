@@ -47,6 +47,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+#define LEDn 8
+
 typedef enum
 {
   LED3 = 0,

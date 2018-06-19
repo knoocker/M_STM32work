@@ -40,6 +40,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern PCD_HandleTypeDef hpcd_USB_FS;
 extern TIM_HandleTypeDef htim14;
 
 /******************************************************************************/
@@ -137,6 +138,20 @@ void TIM14_IRQHandler(void)
   /* USER CODE BEGIN TIM14_IRQn 1 */
 
   /* USER CODE END TIM14_IRQn 1 */
+}
+
+/**
+* @brief This function handles USB global Interrupt / USB wake-up interrupt through EXTI line 18.
+*/
+void USB_IRQHandler(void)
+{
+  /* USER CODE BEGIN USB_IRQn 0 */
+
+  /* USER CODE END USB_IRQn 0 */
+  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+  /* USER CODE BEGIN USB_IRQn 1 */
+
+  /* USER CODE END USB_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
