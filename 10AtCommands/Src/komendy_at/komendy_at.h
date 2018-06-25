@@ -36,4 +36,6 @@ int8_t at_ir_service(uint8_t inout, char * params);
 int8_t at_led_service(uint8_t inout, char * params);
 int8_t at_lcd_service( uint8_t inout, char * params );
 
+int8_t at_pasek_service(uint8_t inout, char * params);
+
 #endif /* KOMENDY_AT_H_ */

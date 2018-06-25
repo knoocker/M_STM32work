@@ -9,13 +9,14 @@
 #include "komendy_at.h"
 #include <string.h>
 
-#define AT_CNT 	2	// iloæ poleceñ AT
+#define AT_CNT 	3	// iloæ poleceñ AT
 
 //----------- tablica z poleceniami AT i wskaŸnikami funkcji do ich obs³ugi --------------------
 const TATCMD polecenia_at[AT_CNT] = {
 // { at_cmd } , { wskaŸnik do funkcji obs³ugi at },
 		{ "AT", at_service },
-		{"ATI", 	ati_service}
+		{"ATI", 	ati_service},
+		{"AT+PASEK", at_pasek_service}
 //		{"AT+RST", 	at_rst_service},
 //		{"AT+IR", 	at_ir_service},
 //		{"AT+LED", 	at_led_service},
@@ -162,6 +163,13 @@ int8_t at_service(uint8_t inout, char * params) {
 int8_t ati_service(uint8_t inout, char * params) {
 	//uart_puts("ATNEL AT Commands tester v1.04\r\n");
 	MessageLength = sprintf(DataToSend, "STM32 AT Commands tester\r\n");
+	CDC_Transmit_FS(DataToSend, MessageLength);
+	return 0;
+}
+
+int8_t at_pasek_service(uint8_t inout, char * params) {
+	//uart_puts("OK\r\n");
+	MessageLength = sprintf(DataToSend, "Twoj tata to grubasek\r\n");
 	CDC_Transmit_FS(DataToSend, MessageLength);
 	return 0;
 }
