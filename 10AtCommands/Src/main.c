@@ -52,7 +52,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "usbd_cdc_if.h" // Plik bedacy interfejsem uzytkownika do kontrolera USB
-#include "komendy_at/komendy_at.h"
+//#include "komendy_at/komendy_at.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -113,7 +113,8 @@ int main(void) {
 	MX_TIM3_Init();
 	MX_USB_DEVICE_Init();
 	/* USER CODE BEGIN 2 */
-
+//	// rejestracja w³asnej funkcji do analizowania danych odebranych przez UART
+//	register_uart_str_rx_event_callback( parse_uart_data );
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -137,7 +138,8 @@ int main(void) {
 
 			MessageLength = sprintf(DataToSend, "Odebrano: %s\n\r",
 					ReceivedData);
-			CDC_Transmit_FS(DataToSend, MessageLength);
+			//CDC_Transmit_FS(DataToSend, MessageLength);
+			parse_uart_data(ReceivedData);
 		}
 		/* USER CODE END WHILE */
 

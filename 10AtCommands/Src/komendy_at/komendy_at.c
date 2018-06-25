@@ -7,6 +7,7 @@
  *  Autor: Marek Piotrowski
  */
 #include "komendy_at.h"
+#include <string.h>
 
 #define AT_CNT 	2	// iloæ poleceñ AT
 
@@ -23,7 +24,6 @@ const TATCMD polecenia_at[AT_CNT] = {
 
 //----------------- funkcja do analizowania danych odebranych z UART ------------------------------
 void parse_uart_data(char * pBuf) {
-
 	int8_t (*_at_srv)(uint8_t inout, char * data);
 
 	char * cmd_wsk;
@@ -39,13 +39,17 @@ void parse_uart_data(char * pBuf) {
 			cmd_wsk = strtok_r(pBuf, "?", &reszta);
 			len = strlen(cmd_wsk);
 			for (i = 0; i < AT_CNT; i++) {
-				if (len
-						&& 0
-								== strncasecmp_P(cmd_wsk,
-										polecenia_at[i].polecenie_at, len)) {
-					if (pgm_read_word(polecenia_at[i].polecenie_at)) { // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
-						_at_srv = (void *) pgm_read_word(
-								&polecenia_at[i].at_service);
+				//if (len	&& 0 == strncasecmp_P(cmd_wsk,polecenia_at[i].polecenie_at, len)) strncasecmp
+				if (len	&& 0 == strncasecmp(cmd_wsk,polecenia_at[i].polecenie_at, len))
+				{
+					MessageLength = sprintf(DataToSend, "1\r\n");
+					CDC_Transmit_FS(DataToSend, MessageLength);
+					/*
+					//if (pgm_read_word(polecenia_at[i].polecenie_at))
+					if (polecenia_at[i].polecenie_at)
+					{ // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
+						//_at_srv = (void *) pgm_read_word(&polecenia_at[i].at_service);
+						_at_srv = polecenia_at[i].at_service;
 						if (_at_srv) {
 							if (_at_srv(0, reszta) < 0) {
 								//uart_puts("ERROR\r\n");
@@ -57,6 +61,7 @@ void parse_uart_data(char * pBuf) {
 					//uart_puts("\r\n");
 					MessageLength = sprintf(DataToSend, "\r","\n");
 					CDC_Transmit_FS(DataToSend, MessageLength);
+					*/
 					break;
 				}
 			}
@@ -67,13 +72,17 @@ void parse_uart_data(char * pBuf) {
 			cmd_wsk = strtok_r(pBuf, "=", &reszta);
 			len = strlen(cmd_wsk);
 			for (i = 0; i < AT_CNT; i++) {
-				if (len
-						&& 0
-								== strncasecmp_P(cmd_wsk,
-										polecenia_at[i].polecenie_at, len)) {
-					if (pgm_read_word(polecenia_at[i].polecenie_at)) { // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
-						_at_srv = (void *) pgm_read_word(
-								&polecenia_at[i].at_service);
+				//if (len	&& 0 == strncasecmp_P(cmd_wsk, polecenia_at[i].polecenie_at, len))
+				if (len	&& 0 == strncasecmp(cmd_wsk,polecenia_at[i].polecenie_at, len))
+				{
+					MessageLength = sprintf(DataToSend, "2\r\n");
+					CDC_Transmit_FS(DataToSend, MessageLength);
+					/*
+					//if (pgm_read_word(polecenia_at[i].polecenie_at))
+					if (polecenia_at[i].polecenie_at)
+					{ // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
+						//_at_srv = (void *) pgm_read_word(&polecenia_at[i].at_service);
+						_at_srv = polecenia_at[i].at_service;
 						if (_at_srv && !_at_srv(1, reszta))
 						{
 							//uart_puts("OK\r\n");
@@ -88,6 +97,7 @@ void parse_uart_data(char * pBuf) {
 							CDC_Transmit_FS(DataToSend, MessageLength);
 						}
 					}
+					*/
 					break;
 				}
 			}
@@ -99,18 +109,26 @@ void parse_uart_data(char * pBuf) {
 		if (0 == pBuf[0])
 		{
 			//uart_puts("\r\n");	// reakcja na znak CR lub CRLF z terminala
+			/*
 			MessageLength = sprintf(DataToSend, "\r","\n");
+			CDC_Transmit_FS(DataToSend, MessageLength);
+			*/
+			MessageLength = sprintf(DataToSend, "3\r\n");
 			CDC_Transmit_FS(DataToSend, MessageLength);
 		}
 
 		else {
 			for (i = 0; i < AT_CNT; i++) {
-				if (0
-						== strncasecmp_P(pBuf, polecenia_at[i].polecenie_at,
-								strlen(pBuf))) {
-					if (pgm_read_word(polecenia_at[i].polecenie_at)) { // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
-						_at_srv = (void *) pgm_read_word(
-								&polecenia_at[i].at_service);
+				//if (0 == strncasecmp_P(pBuf, polecenia_at[i].polecenie_at, strlen(pBuf)))
+				if (0 == strncasecmp(pBuf, polecenia_at[i].polecenie_at, strlen(pBuf)))
+				{
+//					MessageLength = sprintf(DataToSend, "4\r\n");
+//					CDC_Transmit_FS(DataToSend, MessageLength);
+					//if (pgm_read_word(polecenia_at[i].polecenie_at))
+					if (polecenia_at[i].polecenie_at)
+					{ // <--- UWAGA! w tekœcie ksi¹¿ki zabrak³o pgm_read_word()
+						//_at_srv = (void *) pgm_read_word(&polecenia_at[i].at_service);
+						_at_srv = polecenia_at[i].at_service;
 						if (_at_srv)
 							_at_srv(2, 0);
 					}
@@ -123,7 +141,11 @@ void parse_uart_data(char * pBuf) {
 	if ( AT_CNT == i)
 	{
 		//uart_puts("ERROR\r\n");
+		/*
 		MessageLength = sprintf(DataToSend, "ERROR","\r\n");
+		CDC_Transmit_FS(DataToSend, MessageLength);
+		*/
+		MessageLength = sprintf(DataToSend, "5\r\n");
 		CDC_Transmit_FS(DataToSend, MessageLength);
 	}
 
@@ -132,14 +154,14 @@ void parse_uart_data(char * pBuf) {
 //----------------- obs³uga poszczególnych komend AT ----------------------------------
 int8_t at_service(uint8_t inout, char * params) {
 	//uart_puts("OK\r\n");
-	MessageLength = sprintf(DataToSend, "OK","\r\n");
+	MessageLength = sprintf(DataToSend, "OK\r\n");
 	CDC_Transmit_FS(DataToSend, MessageLength);
 	return 0;
 }
 
 int8_t ati_service(uint8_t inout, char * params) {
 	//uart_puts("ATNEL AT Commands tester v1.04\r\n");
-	MessageLength = sprintf(DataToSend, "STM32 AT Commands tester","\r\n");
+	MessageLength = sprintf(DataToSend, "STM32 AT Commands tester\r\n");
 	CDC_Transmit_FS(DataToSend, MessageLength);
 	return 0;
 }

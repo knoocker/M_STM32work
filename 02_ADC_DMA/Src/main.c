@@ -119,6 +119,7 @@ int main(void)
   MX_DMA_Init();
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
+  HAL
   HAL_ADC_Start_DMA(&hadc1, &PomiarADC, 1);
   /* USER CODE END 2 */
 
