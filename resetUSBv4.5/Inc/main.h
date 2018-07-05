@@ -65,12 +65,12 @@
 #define M_IN1_GPIO_Port GPIOA
 #define M_IN2_Pin GPIO_PIN_1
 #define M_IN2_GPIO_Port GPIOA
-#define LED_RED_Pin GPIO_PIN_3
-#define LED_RED_GPIO_Port GPIOA
-#define LED_GREEN_Pin GPIO_PIN_4
+#define LED_GREEN_Pin GPIO_PIN_3
 #define LED_GREEN_GPIO_Port GPIOA
-#define LED_BLUE_Pin GPIO_PIN_5
+#define LED_BLUE_Pin GPIO_PIN_4
 #define LED_BLUE_GPIO_Port GPIOA
+#define LED_RED_Pin GPIO_PIN_5
+#define LED_RED_GPIO_Port GPIOA
 #define PRZYCISK_Pin GPIO_PIN_9
 #define PRZYCISK_GPIO_Port GPIOA
 #define USB_PWR_Pin GPIO_PIN_10
